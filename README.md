@@ -1,6 +1,5 @@
-# role-watch
-##### Otherwise known as colour-roles
-Strip color based roles from users that aren't on the dedicated whitelist
+# typescript discord bot
+This is a template for anyone who wants to use a discord bot in typescript
 
 ---
 
@@ -26,3 +25,8 @@ Strip color based roles from users that aren't on the dedicated whitelist
 - Adding new commands is pretty easy just add a new file and copy the template, easy right?
 - ESlint has been added in here for extra help to help you style your code to be better (you can press `ctrl + shift + p` then click )
 ---
+
+###### Help support my personal bot! written in typescript too!
+- [Support Server](https://support.bucketbot.dev)
+- [Invite](https://invite.bucketbot.dev)
+- [Github](https://github.com/KingOKarma/KFCBoy)
