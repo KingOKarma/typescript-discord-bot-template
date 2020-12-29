@@ -1,8 +1,9 @@
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import * as commando from 'discord.js-commando';
 import { getMember } from '../../utils';
+
 // Creates a new class (being the command) extending off of the commando client
-module.exports = class UserInfoCommand extends commando.Command {
+export default class UserInfoCommand extends commando.Command {
   constructor(client: commando.CommandoClient) {
     super(client, {
       name: 'userinfo',
@@ -23,7 +24,6 @@ module.exports = class UserInfoCommand extends commando.Command {
       // Require's bot to have MANAGE_MESSAGES perms
       clientPermissions: ['MANAGE_MESSAGES'],
       // Require's user to have MANAGE_MESSAGES perms
-
       userPermissions: ['MANAGE_MESSAGES'],
       // These are your arguments
       args: [
@@ -37,18 +37,22 @@ module.exports = class UserInfoCommand extends commando.Command {
   }
 
   // Now to run the actual command, the run() parameters need to be defiend (by types and names)
-  run(msg: commando.CommandoMessage, { memberID }: { memberID: string }) {
+  public async run(
+    msg: commando.CommandoMessage,
+    { memberID }: { memberID: string },
+  ): Promise<Message | Message[]> {
     // Responds with whatever the user has said.
     const member = getMember(memberID, msg.guild);
+
     if (member === undefined) {
       return msg.reply('Sorry I cannot find that user!');
     }
+
     const embed = new MessageEmbed()
       .setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
       .setTitle('Info')
       .setDescription(`Created account at ${member.user.createdAt.toLocaleString('en-US')}`);
 
-    msg.say(embed);
-    return null;
+    return msg.say(embed);
   }
-};
+}

@@ -1,6 +1,7 @@
+import { Message } from 'discord.js';
 import * as commando from 'discord.js-commando';
 // Creates a new class (being the command) extending off of the commando client
-module.exports = class sayCommand extends commando.Command {
+export default class sayCommand extends commando.Command {
   constructor(client: commando.CommandoClient) {
     super(client, {
       name: 'say',
@@ -32,12 +33,13 @@ module.exports = class sayCommand extends commando.Command {
   }
 
   // Now to run the actual command, the run() parameters need to be defiend (by types and names)
-  run(msg: commando.CommandoMessage, { args1 }: { args1: string }) {
+  public async run(
+    msg: commando.CommandoMessage,
+    { args1 }: { args1: string },
+  ): Promise<Message | Message[]> {
     // Deletes command usage
     msg.delete();
     // Responds with whatever the user has said.
-    msg.say(args1);
-    // return if null
-    return null;
+    return msg.say(args1);
   }
-};
+}
